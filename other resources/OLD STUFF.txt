@@ -1,0 +1,207 @@
+const int DEFAULT_DIATONIC_I = NOTE_C_4;
+const int DEFAULT_DIATONIC_II = NOTE_D_4;
+const int DEFAULT_DIATONIC_III = NOTE_E_4;
+const int DEFAULT_DIATONIC_IV = NOTE_F_4;
+const int DEFAULT_DIATONIC_V = NOTE_G_4;
+const int DEFAULT_DIATONIC_VI = NOTE_A_4;
+const int DEFAULT_DIATONIC_VII = NOTE_B_4;
+const int DEFAULT_OCTAVE = NOTE_C_5;
+
+const int DEFAULT_VELOCITY = 0x45;
+const int SILENCE = 0x00;
+
+int octave = 4;
+int transpose = 0;
+
+int note[8];
+int note_held[8] = { 0 };
+
+bool prevent_transmit = true;
+
+
+
+/////////////////////////////////////////////////////////////////////////////// user functions
+
+void reset_notes() {
+  note[0] = DEFAULT_DIATONIC_I;
+  note[1] = DEFAULT_DIATONIC_II;
+  note[2] = DEFAULT_DIATONIC_III;
+  note[3] = DEFAULT_DIATONIC_IV;
+  note[4] = DEFAULT_DIATONIC_V;
+  note[5] = DEFAULT_DIATONIC_VI;
+  note[6] = DEFAULT_DIATONIC_VII;
+  note[7] = DEFAULT_OCTAVE;
+}
+
+
+
+bool any_button_pressed() {
+
+  for (int i = 0; i < 12; i++) {
+    if (controller.buttons[i] == HIGH) {
+      return true;
+    }
+  }
+  
+  return false;
+}
+
+
+void transpose_notes() {
+    // if (controller.pressed(GamePad::L)) {
+    //   if (octave >= -1) {
+    //     octave--;
+    //     for (int n = 0; n < 12; n++) {
+    //       note[n] = note[n] + (4 - octave);
+    //     }
+    //   }
+    // }
+
+    // if (controller.pressed(GamePad::R)) {
+    //   if (octave <= 8) {
+    //     octave++;
+    //     for (int n = 0; n < 12; n++) {
+    //       note[n] = note[n] + (4 - octave);
+    //     }        
+    //   }
+    // }
+};
+
+
+void send_modulation_commands() {}
+
+
+void send_note_velocity(int pitch, int velocity) {
+  Serial2.write(CMD_PLAYNOTE);
+  Serial2.write(pitch);
+  Serial2.write(velocity);
+}
+
+
+
+void send_note_off(int pitch) {
+  Serial2.write(CMD_STOPNOTE);
+  Serial2.write(pitch);
+  Serial2.write(SILENCE);
+}
+
+
+
+void note_blink_test() {
+  send_note_velocity(NOTE_C_3, 0x45);
+  delay(500);
+  send_note_off(NOTE_C_3);
+  delay(500);
+}
+
+
+
+void send_note_commands(int velocity)
+{
+/*
+  B = 0,        // DIATONIC_III
+  Y = 1,        // DIATONIC_V
+  SELECT = 2,   // MENU_EDIT
+  START = 3,    // CONTROLLER_MOD
+  UP = 4,       // DIATONIC_II
+  DOWN = 5,     // DIATONIC_I
+  LEFT = 6,     // DIATONIC_IV
+  RIGHT = 7,    // DIATONIC_VI
+  A = 8,        // DIATONIC_VIII
+  X = 9,        // DIATONIC_VII
+  L = 10,       // FUNCTION_L
+  R = 11,       // FUNCTION_R
+*/
+
+  //Serial.write(CMD_PLAYNOTE);
+
+
+  if (controller.down(GamePad::DOWN)) {
+    // if (note_held[0]==0) { 
+      send_note_velocity(note[0], velocity);
+      // note_held[0] = 1;
+    // }
+  } else {
+    // send_note_velocity(note[0], SILENCE);
+    send_note_off(note[0]);
+    // note_held[0] = 0;
+  }
+
+  if (controller.down(GamePad::UP)) {
+    // if (note_held[1]==0) { 
+      send_note_velocity(note[1], velocity);
+      // note_held[1] = 1;
+    // }
+  } else {
+    // send_note_velocity(note[1], SILENCE);
+    send_note_off(note[1]);
+    // note_held[1] = 0;
+  }
+
+  if (controller.down(GamePad::B)) {
+    // if (note_held[2]==0) { 
+      send_note_velocity(note[2], velocity);
+      // note_held[2] = 1;
+    // }
+  } else {
+    // send_note_velocity(note[2], SILENCE);
+    send_note_off(note[2]);
+    // note_held[2] = 0;
+  }
+
+  if (controller.down(GamePad::LEFT)) {
+    // if (note_held[3]==0) { 
+      send_note_velocity(note[3], velocity);
+      // note_held[3] = 1;
+    // }
+  } else {
+    // send_note_velocity(note[3], SILENCE);
+    send_note_off(note[3]);
+    // note_held[3] = 0;
+  }
+
+  if (controller.down(GamePad::Y)) {
+    // if (note_held[4]==0) { 
+      send_note_velocity(note[4], velocity);
+      // note_held[4] = 1;
+    // }
+  } else {
+    // send_note_velocity(note[4], SILENCE);
+    send_note_off(note[4]);
+    // note_held[4] = 0;
+  }
+
+  if (controller.down(GamePad::RIGHT)) {
+    // if (note_held[5]==0) { 
+      send_note_velocity(note[5], velocity);
+      // note_held[5] = 1;
+    // }
+  } else {
+    // send_note_velocity(note[5], SILENCE);
+    send_note_off(note[5]);    
+    // note_held[5] = 0;
+  }
+
+  if (controller.down(GamePad::X)) {
+    // if (note_held[6]==0) { 
+      send_note_velocity(note[6], velocity);
+      // note_held[6] = 1;
+    // }
+  } else {
+    // send_note_velocity(note[6], SILENCE);
+    send_note_off(note[6]);    
+    // note_held[6] = 0;
+  }
+
+  if (controller.down(GamePad::A)) {
+    // if (note_held[7]==0) { 
+      send_note_velocity(note[7], velocity);
+      // note_held[7] = 1;
+    // }
+  } else {
+    // send_note_velocity(note[7], SILENCE);
+    send_note_off(note[7]);
+    // note_held[7] = 0;
+  }
+}
+

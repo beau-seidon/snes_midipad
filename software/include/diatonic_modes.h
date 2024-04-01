@@ -1,7 +1,5 @@
 #pragma once
-
 #include <diatonic_intervals.h>
-
 
 
 struct DiatonicMode
@@ -14,5 +12,3 @@ struct DiatonicMode
     const int aeolian[8] =    {P1, M2, m3, P4, P5, m6, m7, P8};   // b7, b3, b6           w h w w h w w 
     const int locrian[8] =    {P1, m2, m3, P4, TT, m6, m7, P8};   // b7, b3, b6, b2, b5   h w w h w w w
 };
-
-

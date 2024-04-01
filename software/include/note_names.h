@@ -1,7 +1,6 @@
 #pragma once
 
 
-
 // http://www.phys.unsw.edu.au/jw/notes.html
 
 #define	NOTE_C_n1	0
@@ -73,7 +72,7 @@
 #define	NOTE_Gb_4	66
 #define	NOTE_G_4	67  // V
 #define	NOTE_Ab_4	68
-#define	NOTE_A_4	69  // VI
+#define	NOTE_A_4	69  // VI (standard reference pitch: 440 Hz)
 #define	NOTE_Bb_4	70
 #define	NOTE_B_4	71  // VII
 #define	NOTE_C_5	72  // VIII
@@ -132,5 +131,3 @@
 #define	NOTE_F_9	125
 #define	NOTE_Gb_9	126
 #define	NOTE_G_9	127
-
-

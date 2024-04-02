@@ -1,11 +1,10 @@
 #include <Arduino.h>
-#include <iostream>
 #include <MIDI.h>
 
-#include <controller_pin_definitions.h>
-#include <snes_controller.h>
-#include <note_names.h>
-#include <diatonic_modes.h>
+#include "controller_pin_definitions.h"
+#include "snes_controller.h"
+#include "note_names.h"
+#include "diatonic_modes.h"
 
 
 

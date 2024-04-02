@@ -1,2 +1,2 @@
 # snes_midipad
-Adapter to convert signals from an SNES gamepad to MIDI notes, based on ESP-32 WROOM Dev Kit V1
+Adapter to convert signals from an SNES gamepad to MIDI notes, based on an ESP-32 (NodeMCU-32S Dev Kit). 
